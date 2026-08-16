@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OrchardCore.Environment.Shell;
 
 namespace OrchardCore.Navigation;
@@ -15,6 +16,7 @@ public class NavigationManager : INavigationManager
     protected readonly ShellSettings _shellSettings;
     private readonly IUrlHelperFactory _urlHelperFactory;
     private readonly IAuthorizationService _authorizationService;
+    private readonly NavigationOptions _navigationOptions;
 
     private IUrlHelper _urlHelper;
 
@@ -23,13 +25,15 @@ public class NavigationManager : INavigationManager
         ILogger<NavigationManager> logger,
         ShellSettings shellSettings,
         IUrlHelperFactory urlHelperFactory,
-        IAuthorizationService authorizationService)
+        IAuthorizationService authorizationService,
+        IOptions<NavigationOptions> navigationOptions)
     {
         _navigationProviders = navigationProviders;
         _logger = logger;
         _shellSettings = shellSettings;
         _urlHelperFactory = urlHelperFactory;
         _authorizationService = authorizationService;
+        _navigationOptions = navigationOptions.Value;
     }
 
     public async Task<IEnumerable<MenuItem>> BuildMenuAsync(string name, ActionContext actionContext)
@@ -53,7 +57,12 @@ public class NavigationManager : INavigationManager
         var menuItems = builder.Build();
 
         // Merge all menu hierarchies into a single one.
-        Merge(menuItems);
+        Merge(menuItems, _navigationOptions.RequireMenuItemId);
+
+        if (_navigationOptions.RequireMenuItemId)
+        {
+            menuItems = RemoveItemsWithoutId(menuItems, name);
+        }
 
         // Remove unauthorized menu items.
         menuItems = await AuthorizeAsync(menuItems, actionContext.HttpContext.User);
@@ -70,9 +79,17 @@ public class NavigationManager : INavigationManager
     /// <summary>
     /// Mutates a list of <see cref="MenuItem"/> into a hierarchy.
     /// </summary>
-    private static void Merge(List<MenuItem> items)
+    /// <param name="requireMenuItemId">
+    /// When <c>true</c>, items are matched for merging by <see cref="MenuItem.Id"/> instead of by
+    /// caption, so merging is unaffected by localization. Only items that both have a non-empty
+    /// <see cref="MenuItem.Id"/> can match; items without one are left alone here and are removed
+    /// later by <see cref="RemoveItemsWithoutId"/>. When <c>false</c>, matching is by caption, to
+    /// preserve current behavior for sites and third-party navigation providers that don't set an
+    /// <see cref="MenuItem.Id"/> yet.
+    /// </param>
+    private static void Merge(List<MenuItem> items, bool requireMenuItemId)
     {
-        // Use two cursors to find all similar captions. If the same caption is represented
+        // Use two cursors to find all similar items. If the same item is represented
         // by multiple menu items, try to merge it recursively.
         for (var i = 0; i < items.Count; i++)
         {
@@ -82,8 +99,12 @@ public class NavigationManager : INavigationManager
             {
                 var cursor = items[j];
 
+                var isMatch = requireMenuItemId
+                    ? !string.IsNullOrEmpty(cursor.Id) && !string.IsNullOrEmpty(source.Id) && string.Equals(cursor.Id, source.Id, StringComparison.Ordinal)
+                    : string.Equals(cursor.Text.Name, source.Text.Name, StringComparison.OrdinalIgnoreCase);
+
                 // A match is found, add all its items to the source.
-                if (string.Equals(cursor.Text.Name, source.Text.Name, StringComparison.OrdinalIgnoreCase))
+                if (isMatch)
                 {
                     merged = true;
                     foreach (var child in cursor.Items)
@@ -145,9 +166,36 @@ public class NavigationManager : INavigationManager
             // If some items have been merged, apply recursively.
             if (merged)
             {
-                Merge(source.Items);
+                Merge(source.Items, requireMenuItemId);
             }
         }
+    }
+
+    /// <summary>
+    /// Removes any <see cref="MenuItem"/> that does not have an explicit <see cref="MenuItem.Id"/>,
+    /// logging an error for each one removed. Never throws.
+    /// </summary>
+    private List<MenuItem> RemoveItemsWithoutId(List<MenuItem> items, string menuName)
+    {
+        var filtered = new List<MenuItem>(items.Count);
+        foreach (var item in items)
+        {
+            item.Items = RemoveItemsWithoutId(item.Items, menuName);
+
+            if (string.IsNullOrEmpty(item.Id))
+            {
+                _logger.LogError(
+                    "Menu item '{MenuItemText}' in menu '{MenuName}' was excluded because it does not have an Id. " +
+                    "Set an Id on the navigation item to include it in the menu.",
+                    item.Text?.Name, menuName);
+
+                continue;
+            }
+
+            filtered.Add(item);
+        }
+
+        return filtered;
     }
 
     /// <summary>

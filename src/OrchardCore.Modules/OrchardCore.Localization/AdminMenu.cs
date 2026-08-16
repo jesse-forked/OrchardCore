@@ -33,8 +33,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-               .Add(S["Configuration"], configuration => configuration
-                   .Add(S["Settings"], settings => settings
+               .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                   .Add(S["Settings"], settings => settings.Id("settings")
                        .Add(S["Localization"], localization => localization
                            .AddClass("localization")
                            .Id("localization")
@@ -53,7 +53,7 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
+            .Add(S["Settings"], settings => settings.Id("settings")
                 .Add(S["Localization"], S["Localization"].PrefixPosition(), localization => localization
                     .AddClass("localization")
                     .Id("localization")

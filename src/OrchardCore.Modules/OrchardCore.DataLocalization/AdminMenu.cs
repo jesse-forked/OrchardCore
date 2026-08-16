@@ -29,9 +29,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["Localization"], localization => localization
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["Localization"], localization => localization.Id("localization")
                             .Add(S["Translations"], S["Translations"].PrefixPosition(), translations => translations
                                 .AddClass("translations")
                                 .Id("translations")
@@ -47,8 +47,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Localization"], S["Localization"].PrefixPosition(), localization => localization
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Localization"], S["Localization"].PrefixPosition(), localization => localization.Id("localization")
                     .Add(S["Dynamic Translations"], S["Dynamic Translations"].PrefixPosition(), translations => translations
                         .AddClass("dynamic-translations")
                         .Id("dynamicTranslations")

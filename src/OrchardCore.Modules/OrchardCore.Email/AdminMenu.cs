@@ -26,8 +26,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
                        .Add(S["Email"], S["Email"].PrefixPosition(), entry => entry
                           .AddClass("email")
                           .Id("email")
@@ -49,8 +49,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
-                .Add(S["Testing"], S["Testing"].PrefixPosition(), testing => testing
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["Testing"], S["Testing"].PrefixPosition(), testing => testing.Id("testing")
                     .Add(S["Email Test"], S["Email Test"].PrefixPosition(), entry => entry
                         .AddClass("emailtest")
                         .Id("emailtest")
@@ -60,8 +60,8 @@ public sealed class AdminMenu : AdminNavigationProvider
                     )
                 )
             )
-            .Add(S["Settings"], settings => settings
-                .Add(S["Communication"], S["Communication"].PrefixPosition(), communication => communication
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Communication"], S["Communication"].PrefixPosition(), communication => communication.Id("communication")
                     .Add(S["Email"], S["Email"].PrefixPosition(), entry => entry
                         .AddClass("email")
                         .Id("email")

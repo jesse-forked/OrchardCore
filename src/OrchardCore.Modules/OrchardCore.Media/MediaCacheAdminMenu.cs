@@ -17,9 +17,9 @@ public sealed class MediaCacheAdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                        .Add(S["Media Cache"], S["Media Cache"].PrefixPosition(), cache => cache
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                        .Add(S["Media Cache"], S["Media Cache"].PrefixPosition(), cache => cache.Id("media-cache")
                             .Action("Index", "MediaCache", "OrchardCore.Media")
                             .Permission(MediaPermissions.ManageAssetCache)
                             .LocalNav()
@@ -31,9 +31,9 @@ public sealed class MediaCacheAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                    .Add(S["Cache"], S["Cache"].PrefixPosition(), cache => cache
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                    .Add(S["Cache"], S["Cache"].PrefixPosition(), cache => cache.Id("cache")
                         .Action("Index", "MediaCache", "OrchardCore.Media")
                         .Permission(MediaPermissions.ManageAssetCache)
                         .LocalNav()

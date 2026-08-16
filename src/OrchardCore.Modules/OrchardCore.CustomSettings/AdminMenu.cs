@@ -43,8 +43,8 @@ public sealed class AdminMenu : AdminNavigationProvider
             if (NavigationHelper.UseLegacyFormat())
             {
                 builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
                         .Add(new LocalizedString(type.DisplayName, type.DisplayName), type.DisplayName.PrefixPosition(), customSettings => customSettings
                             .Action("Index", "Admin", routeValues)
                             .AddClass(htmlName)
@@ -60,7 +60,7 @@ public sealed class AdminMenu : AdminNavigationProvider
             }
 
             builder
-                .Add(S["Settings"], settings => settings
+                .Add(S["Settings"], settings => settings.Id("settings")
                     .Add(new LocalizedString(type.DisplayName, type.DisplayName), type.DisplayName.PrefixPosition(), layers => layers
                         .Action("Index", "Admin", routeValues)
                         .AddClass(htmlName)

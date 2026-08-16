@@ -25,9 +25,9 @@ public sealed class RegistrationAdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Security"], security => security
-                    .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings
-                        .Add(S["User Registration"], S["User Registration"].PrefixPosition(), registration => registration
+                .Add(S["Security"], security => security.Id("security")
+                    .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings.Id("settings")
+                        .Add(S["User Registration"], S["User Registration"].PrefixPosition(), registration => registration.Id("user-registration")
                             .Permission(UsersPermissions.ManageUsers)
                             .Action("Index", "Admin", s_routeValues)
                             .LocalNav()
@@ -39,9 +39,9 @@ public sealed class RegistrationAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["Registration"], S["Registration"].PrefixPosition(), registration => registration
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["Registration"], S["Registration"].PrefixPosition(), registration => registration.Id("registration")
                         .Permission(UsersPermissions.ManageUsers)
                         .Action("Index", "Admin", s_routeValues)
                         .LocalNav()

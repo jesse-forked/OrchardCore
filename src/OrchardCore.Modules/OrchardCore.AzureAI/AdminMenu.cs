@@ -38,8 +38,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-               .Add(S["Configuration"], configuration => configuration
-                   .Add(S["Settings"], settings => settings
+               .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                   .Add(S["Settings"], settings => settings.Id("settings")
                        .Add(S["Azure AI Search"], S["Azure AI Search"].PrefixPosition(), azureAISearch => azureAISearch
                        .AddClass("azure-ai-search")
                            .Id("azureaisearch")
@@ -54,8 +54,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Search"], S["Search"].PrefixPosition(), search => search
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Search"], S["Search"].PrefixPosition(), search => search.Id("search")
                     .Add(S["Azure AI Search"], S["Azure AI Search"].PrefixPosition(), azureAISearch => azureAISearch
                     .AddClass("azure-ai-search")
                         .Id("azureaisearch")

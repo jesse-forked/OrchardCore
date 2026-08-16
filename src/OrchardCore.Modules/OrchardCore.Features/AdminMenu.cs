@@ -25,8 +25,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Features"], S["Features"].PrefixPosition(), deployment => deployment
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Features"], S["Features"].PrefixPosition(), deployment => deployment.Id("features")
                         .Action("Features", "Admin", s_routeValues)
                         .Permission(FeaturesPermissions.ManageFeatures)
                         .LocalNav()
@@ -37,8 +37,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
-                .Add(S["Features"], S["Features"].PrefixPosition(), deployment => deployment
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["Features"], S["Features"].PrefixPosition(), deployment => deployment.Id("features")
                     .Action("Features", "Admin", s_routeValues)
                     .Permission(FeaturesPermissions.ManageFeatures)
                     .LocalNav()

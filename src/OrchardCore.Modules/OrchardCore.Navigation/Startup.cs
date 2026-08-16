@@ -25,5 +25,6 @@ public sealed class Startup : StartupBase
 
         var navigationConfiguration = _shellConfiguration.GetSection("OrchardCore_Navigation");
         services.Configure<PagerOptions>(navigationConfiguration.GetSection("PagerOptions"));
+        services.Configure<NavigationOptions>(navigationConfiguration.GetSection("NavigationOptions"));
     }
 }

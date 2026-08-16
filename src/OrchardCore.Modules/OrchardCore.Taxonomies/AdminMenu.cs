@@ -25,8 +25,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-            .Add(S["Configuration"], configuration => configuration
-                .Add(S["Settings"], "1", settings => settings
+            .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                .Add(S["Settings"], "1", settings => settings.Id("settings")
                     .Add(S["Taxonomy Filters"], S["Taxonomy Filters"].PrefixPosition(), filters => filters
                         .AddClass("taxonomyfilters")
                         .Id("taxonomyfilters")
@@ -41,7 +41,7 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
+            .Add(S["Settings"], settings => settings.Id("settings")
                 .Add(S["Taxonomy Filters"], S["Taxonomy Filters"].PrefixPosition(), filters => filters
                     .AddClass("taxonomyfilters")
                     .Id("taxonomyfilters")

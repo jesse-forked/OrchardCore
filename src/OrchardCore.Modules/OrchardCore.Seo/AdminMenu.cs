@@ -24,8 +24,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
                        .Add(S["SEO"], S["SEO"].PrefixPosition(), seo => seo
                            .AddClass("seo")
                            .Id("seo")
@@ -40,12 +40,12 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Search"], S["Search"].PrefixPosition(), search => search
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Search"], S["Search"].PrefixPosition(), search => search.Id("search")
                     .Add(S["Search Engine Optimization"], S["Search Engine Optimization"].PrefixPosition(), seo => seo
                         .AddClass("seo")
                         .Id("seo")
-                        .Add(S["Robots"], S["Robots"].PrefixPosition(), robots => robots
+                        .Add(S["Robots"], S["Robots"].PrefixPosition(), robots => robots.Id("robots")
                             .Action("Index", "Admin", s_routeValues)
                             .Permission(SeoConstants.ManageSeoSettings)
                             .LocalNav()

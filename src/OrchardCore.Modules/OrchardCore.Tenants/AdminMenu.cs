@@ -30,7 +30,7 @@ public sealed class AdminMenu : AdminNavigationProvider
             .Add(S["Multi-Tenancy"], "after.25", tenancy => tenancy
                 .AddClass("menu-multitenancy")
                 .Id("multitenancy")
-                .Add(S["Tenants"], S["Tenants"].PrefixPosition(), tenant => tenant
+                .Add(S["Tenants"], S["Tenants"].PrefixPosition(), tenant => tenant.Id("tenants")
                     .Action("Index", "Admin", "OrchardCore.Tenants")
                     .Permission(Permissions.ManageTenants)
                     .LocalNav()

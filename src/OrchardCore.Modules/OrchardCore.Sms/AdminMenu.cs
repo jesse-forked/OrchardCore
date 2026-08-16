@@ -26,8 +26,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
                         .Add(S["SMS"], S["SMS"].PrefixPosition(), sms => sms
                             .AddClass("sms")
                             .Id("sms")
@@ -49,8 +49,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Communication"], S["Communication"].PrefixPosition(), communication => communication
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Communication"], S["Communication"].PrefixPosition(), communication => communication.Id("communication")
                     .Add(S["SMS"], S["SMS"].PrefixPosition(), sms => sms
                         .AddClass("sms")
                         .Id("sms")
@@ -60,8 +60,8 @@ public sealed class AdminMenu : AdminNavigationProvider
                     )
                 )
             )
-            .Add(S["Tools"], tools => tools
-                .Add(S["Testing"], S["Testing"].PrefixPosition(), testing => testing
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["Testing"], S["Testing"].PrefixPosition(), testing => testing.Id("testing")
                     .Add(S["SMS Test"], S["SMS Test"].PrefixPosition(), sms => sms
                         .AddClass("smstest")
                         .Id("smstest")

@@ -35,7 +35,7 @@ public sealed class AdminMenu : AdminNavigationProvider
                 .Add(S["Configuration"], NavigationConstants.AdminMenuConfigurationPosition, configuration => configuration
                     .AddClass("menu-configuration")
                     .Id("configuration")
-                    .Add(S["Settings"], "1", settings => settings
+                    .Add(S["Settings"], "1", settings => settings.Id("settings")
                         .Add(S["General"], "1", entry => entry
                             .AddClass("general")
                             .Id("general")

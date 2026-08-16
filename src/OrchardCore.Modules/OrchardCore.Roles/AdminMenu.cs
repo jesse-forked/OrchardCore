@@ -17,7 +17,7 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Security"], security => security
+                .Add(S["Security"], security => security.Id("security")
                     .Add(S["Roles"], S["Roles"].PrefixPosition(), roles => roles
                         .AddClass("roles")
                         .Id("roles")
@@ -31,7 +31,7 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Access Control"], accessControl => accessControl
+            .Add(S["Access Control"], accessControl => accessControl.Id("access-control")
                 .Add(S["Roles"], S["Roles"].PrefixPosition(), roles => roles
                     .AddClass("roles")
                     .Id("roles")

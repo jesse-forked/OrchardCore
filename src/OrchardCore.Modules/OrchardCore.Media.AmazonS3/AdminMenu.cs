@@ -16,9 +16,9 @@ public sealed class AdminMenu : AdminNavigationProvider
     {
         if (NavigationHelper.UseLegacyFormat())
         {
-            builder.Add(S["Configuration"], configuration => configuration
-                .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                    .Add(S["Amazon S3 Options"], S["Amazon S3 Options"].PrefixPosition(), options => options
+            builder.Add(S["Configuration"], configuration => configuration.Id("configuration")
+                .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                    .Add(S["Amazon S3 Options"], S["Amazon S3 Options"].PrefixPosition(), options => options.Id("amazon-s3-options")
                         .Action("Options", "Admin", "OrchardCore.Media.AmazonS3")
                         .Permission(Permissions.ViewAmazonS3MediaOptions)
                         .LocalNav()
@@ -29,9 +29,9 @@ public sealed class AdminMenu : AdminNavigationProvider
             return ValueTask.CompletedTask;
         }
 
-        builder.Add(S["Settings"], settings => settings
-            .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                .Add(S["Amazon S3 Options"], S["Amazon S3 Options"].PrefixPosition(), options => options
+        builder.Add(S["Settings"], settings => settings.Id("settings")
+            .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                .Add(S["Amazon S3 Options"], S["Amazon S3 Options"].PrefixPosition(), options => options.Id("amazon-s3-options")
                     .Action("Options", "Admin", "OrchardCore.Media.AmazonS3")
                     .Permission(Permissions.ViewAmazonS3MediaOptions)
                     .LocalNav()

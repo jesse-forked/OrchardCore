@@ -31,9 +31,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-            .Add(S["Configuration"], configuration => configuration
-                .Add(S["Settings"], settings => settings
-                    .Add(S["Localization"], localization => localization
+            .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                .Add(S["Settings"], settings => settings.Id("settings")
+                    .Add(S["Localization"], localization => localization.Id("localization")
                         .Add(S["Content Request Culture Provider"], S["Content Request Culture Provider"].PrefixPosition(), provider => provider
                             .AddClass("contentrequestcultureprovider")
                             .Id("contentrequestcultureprovider")
@@ -56,8 +56,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Localization"], S["Localization"].PrefixPosition(), localization => localization
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Localization"], S["Localization"].PrefixPosition(), localization => localization.Id("localization")
                     .Add(S["Content Culture"], S["Content Culture"].PrefixPosition(), provider => provider
                         .AddClass("contentrequestcultureprovider")
                         .Id("contentrequestcultureprovider")

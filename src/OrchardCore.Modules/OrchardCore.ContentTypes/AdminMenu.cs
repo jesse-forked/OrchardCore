@@ -22,14 +22,14 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Content"], content => content
-                    .Add(S["Content Definition"], S["Content Definition"].PrefixPosition("9"), contentDefinition => contentDefinition
-                        .Add(S["Content Types"], S["Content Types"].PrefixPosition("1"), contentTypes => contentTypes
+                .Add(S["Content"], content => content.Id("content")
+                    .Add(S["Content Definition"], S["Content Definition"].PrefixPosition("9"), contentDefinition => contentDefinition.Id("content-definition")
+                        .Add(S["Content Types"], S["Content Types"].PrefixPosition("1"), contentTypes => contentTypes.Id("content-types")
                             .Action(nameof(AdminController.List), s_adminControllerName, "OrchardCore.ContentTypes")
                             .Permission(ContentTypesPermissions.ViewContentTypes)
                             .LocalNav()
                         )
-                        .Add(S["Content Parts"], S["Content Parts"].PrefixPosition("2"), contentParts => contentParts
+                        .Add(S["Content Parts"], S["Content Parts"].PrefixPosition("2"), contentParts => contentParts.Id("content-parts")
                             .Action(nameof(AdminController.ListParts), s_adminControllerName, "OrchardCore.ContentTypes")
                             .Permission(ContentTypesPermissions.ViewContentTypes)
                             .LocalNav()
@@ -39,14 +39,14 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Design"], content => content
-                .Add(S["Content Definition"], S["Content Definition"].PrefixPosition(), contentDefinition => contentDefinition
-                    .Add(S["Content Types"], S["Content Types"].PrefixPosition("1"), contentTypes => contentTypes
+            .Add(S["Design"], content => content.Id("design")
+                .Add(S["Content Definition"], S["Content Definition"].PrefixPosition(), contentDefinition => contentDefinition.Id("content-definition")
+                    .Add(S["Content Types"], S["Content Types"].PrefixPosition("1"), contentTypes => contentTypes.Id("content-types")
                         .Action(nameof(AdminController.List), s_adminControllerName, "OrchardCore.ContentTypes")
                         .Permission(ContentTypesPermissions.ViewContentTypes)
                         .LocalNav()
                     )
-                    .Add(S["Content Parts"], S["Content Parts"].PrefixPosition("2"), contentParts => contentParts
+                    .Add(S["Content Parts"], S["Content Parts"].PrefixPosition("2"), contentParts => contentParts.Id("content-parts")
                         .Action(nameof(AdminController.ListParts), s_adminControllerName, "OrchardCore.ContentTypes")
                         .Permission(ContentTypesPermissions.ViewContentTypes)
                         .LocalNav()

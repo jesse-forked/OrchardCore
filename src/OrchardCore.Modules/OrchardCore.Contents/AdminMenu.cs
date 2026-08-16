@@ -67,6 +67,7 @@ public sealed class AdminMenu : AdminNavigationProvider
             content.AddClass("content").Id("content");
             await content.AddAsync(S["Content Items"], "before", async contentItems =>
             {
+                contentItems.Id("content-items");
                 if (!await _authorizationService.AuthorizeContentTypeDefinitionsAsync(context.User, CommonPermissions.ListContent, listableContentTypes, _contentManager))
                 {
                     contentItems.Permission(CommonPermissions.ListContent);
@@ -98,6 +99,7 @@ public sealed class AdminMenu : AdminNavigationProvider
                         if (createRouteValues.Count > 0)
                         {
                             newMenu.Add(new LocalizedString(contentTypeDefinition.DisplayName, contentTypeDefinition.DisplayName), "5", item => item
+                                .Id($"new-content.{contentTypeDefinition.Name}")
                                 .Action(cim.CreateRouteValues["Action"] as string, cim.CreateRouteValues["Controller"] as string, cim.CreateRouteValues)
                                 .Permission(ContentTypePermissionsHelper.CreateDynamicPermission(ContentTypePermissionsHelper.PermissionTemplates[CommonPermissions.EditOwnContent.Name], contentTypeDefinition))
                                 );

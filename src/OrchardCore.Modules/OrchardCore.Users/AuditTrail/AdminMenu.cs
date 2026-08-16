@@ -26,9 +26,9 @@ public sealed class AdminMenu : AdminNavigationProvider
     protected override ValueTask BuildAsync(NavigationBuilder builder)
     {
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["User Audit Trail"], S["User Audit Trail"].PrefixPosition(), login => login
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["User Audit Trail"], S["User Audit Trail"].PrefixPosition(), login => login.Id("user-audit-trail")
                         .Permission(Permissions.ManageUserAuditTrailSettings)
                         .Action(
                             nameof(AuditTrailAdminController.Index),

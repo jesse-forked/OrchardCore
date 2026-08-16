@@ -37,8 +37,8 @@ public sealed class AdminMenu : AdminNavigationProvider
                         .Resource(new User())
                         .LocalNav()
                     )
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["User Login"], S["User Login"].PrefixPosition(), login => login
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["User Login"], S["User Login"].PrefixPosition(), login => login.Id("user-login")
                             .Permission(UsersPermissions.ManageUsers)
                             .Action("Index", "Admin", s_routeValues)
                             .LocalNav()
@@ -63,9 +63,9 @@ public sealed class AdminMenu : AdminNavigationProvider
                 )
             , priority: 1)
 
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["User Login"], S["User Login"].PrefixPosition(), login => login
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["User Login"], S["User Login"].PrefixPosition(), login => login.Id("user-login")
                         .Permission(UsersPermissions.ManageUsers)
                         .Action("Index", "Admin", s_routeValues)
                         .LocalNav()

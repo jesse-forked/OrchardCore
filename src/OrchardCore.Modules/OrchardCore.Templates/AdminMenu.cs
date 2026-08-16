@@ -15,8 +15,8 @@ public sealed class AdminMenu : AdminNavigationProvider
     protected override ValueTask BuildAsync(NavigationBuilder builder)
     {
         builder
-            .Add(S["Design"], design => design
-                .Add(S["Templates"], S["Templates"].PrefixPosition(), import => import
+            .Add(S["Design"], design => design.Id("design")
+                .Add(S["Templates"], S["Templates"].PrefixPosition(), import => import.Id("templates")
                     .Action("Index", "Template", "OrchardCore.Templates")
                     .Permission(Permissions.ManageTemplates)
                     .LocalNav()

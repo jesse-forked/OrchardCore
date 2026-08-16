@@ -18,8 +18,8 @@ internal sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Tools"], tools => tools
-                    .Add(S["Rate Limits"], S["Rate Limits"].PrefixPosition(), rateLimits => rateLimits
+                .Add(S["Tools"], tools => tools.Id("tools")
+                    .Add(S["Rate Limits"], S["Rate Limits"].PrefixPosition(), rateLimits => rateLimits.Id("rate-limits")
                         .Action("Index", "Admin", "OrchardCore.RateLimits")
                         .Permission(RateLimitsPermissions.ManageRateLimits)
                         .LocalNav()
@@ -30,8 +30,8 @@ internal sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
-                .Add(S["Rate Limits"], S["Rate Limits"].PrefixPosition(), rateLimits => rateLimits
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["Rate Limits"], S["Rate Limits"].PrefixPosition(), rateLimits => rateLimits.Id("rate-limits")
                     .Action("Index", "Admin", "OrchardCore.RateLimits")
                     .Permission(RateLimitsPermissions.ManageRateLimits)
                     .LocalNav()

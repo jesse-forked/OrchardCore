@@ -165,6 +165,7 @@ public sealed class MainMenu : INavigationProvider
 
         builder
             .Add(S["Notifications"], S["Notifications"], notifications => notifications
+                .Id("notifications")
                 .Action("Index", "Template", new { area = "CRT.Client.OrchardModules.CommunicationTemplates", groupId = "1" })
                 .LocalNav()
             );
@@ -173,6 +174,14 @@ public sealed class MainMenu : INavigationProvider
     }
 }
 ```  
+
+Always set an `Id` on the items you add, via `NavigationItemBuilder.Id(...)` as shown above. It gives the item a stable identity across requests, independent of its (possibly localized) caption, which other code — including third-party modules — can use to reliably find or extend it later. Use a bare, human-readable slug of the caption (e.g. `settings`, `notifications`), not a module-qualified one: if another module contributes an item with the same caption (a shared "Settings" or "Tools" group node, for example), giving it the same `Id` lets the two merge into a single node the way OrchardCore's navigation merging already expects, including when `RequireMenuItemId` (below) changes merging to be `Id`-based. A menu item's `Id` isn't required by default, but `NavigationManager` can be configured to drop any item that doesn't have one; see [Requiring Menu Item Ids](#requiring-menu-item-ids) below.
+
+### Requiring Menu Item Ids
+
+By default, menu items are merged by caption, and a menu item without an explicit `Id` is still included when a menu is built. Setting `OrchardCore_Navigation:NavigationOptions:RequireMenuItemId` to `true` in configuration changes both of these: items are merged by `Id` instead of by caption, so merging is unaffected by localized/translated captions, and `NavigationManager.BuildMenuAsync` excludes, and logs an error for, any menu item that still has no `Id` after merging. Building a menu never throws because of this setting — items without an `Id` are simply omitted from the result and logged so they can be found and fixed.
+
+This is off by default so it doesn't change behavior for existing sites or third-party navigation providers that don't set an `Id` yet. All of Orchard Core's own built-in navigation providers set an `Id` on every item they add, and this option is expected to become the default, and eventually the only, behavior in a future version.
 
 ### Implementing `INavigationProvider` to Add Menu Items
 

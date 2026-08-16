@@ -25,12 +25,12 @@ public sealed class ClientAdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-               .Add(S["Security"], security => security
+               .Add(S["Security"], security => security.Id("security")
                    .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId
                        .AddClass("openid")
                        .Id("openid")
-                       .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings
-                           .Add(S["Authentication Client"], S["Authentication Client"].PrefixPosition(), client => client
+                       .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings.Id("settings")
+                           .Add(S["Authentication Client"], S["Authentication Client"].PrefixPosition(), client => client.Id("authentication-client")
                                .Action("Index", "Admin", s_clientRouteValues)
                                .Permission(OpenIdPermissions.ManageClientSettings)
                                .LocalNav()
@@ -43,9 +43,9 @@ public sealed class ClientAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId
-                    .Add(S["Authentication Client"], S["Authentication Client"].PrefixPosition(), client => client
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId.Id("openid-connect")
+                    .Add(S["Authentication Client"], S["Authentication Client"].PrefixPosition(), client => client.Id("authentication-client")
                         .Action("Index", "Admin", s_clientRouteValues)
                         .Permission(OpenIdPermissions.ManageClientSettings)
                         .LocalNav()

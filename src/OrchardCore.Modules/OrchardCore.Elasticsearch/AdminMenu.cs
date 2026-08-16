@@ -30,7 +30,7 @@ public sealed class AdminMenu : AdminNavigationProvider
             .Add(S["Search"], NavigationConstants.AdminMenuSearchPosition, search => search
                 .AddClass("search")
                 .Id("search")
-                .Add(S["Queries"], S["Queries"].PrefixPosition(), import => import
+                .Add(S["Queries"], S["Queries"].PrefixPosition(), import => import.Id("queries")
                     .Add(S["Run Elasticsearch Query"], S["Run Elasticsearch Query"].PrefixPosition(), queries => queries
                         .Action("Query", "Admin", "OrchardCore.Elasticsearch")
                         .AddClass("elasticsearchquery")

@@ -28,8 +28,8 @@ public sealed class AdminMenu : AdminNavigationProvider
                 .Add(S["Security"], NavigationConstants.AdminMenuSecurityPosition, security => security
                     .AddClass("security")
                     .Id("security")
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["Security Headers"], S["Security Headers"].PrefixPosition(), headers => headers
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["Security Headers"], S["Security Headers"].PrefixPosition(), headers => headers.Id("security-headers")
                             .Permission(SecurityPermissions.ManageSecurityHeadersSettings)
                             .Action("Index", "Admin", s_routeValues)
                             .LocalNav()
@@ -41,9 +41,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["Security Headers"], S["Security Headers"].PrefixPosition(), headers => headers
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["Security Headers"], S["Security Headers"].PrefixPosition(), headers => headers.Id("security-headers")
                         .Permission(SecurityPermissions.ManageSecurityHeadersSettings)
                         .Action("Index", "Admin", s_routeValues)
                         .LocalNav()

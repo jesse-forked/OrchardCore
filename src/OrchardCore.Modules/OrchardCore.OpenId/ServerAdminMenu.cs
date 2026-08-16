@@ -17,12 +17,12 @@ public sealed class ServerAdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-               .Add(S["Security"], security => security
+               .Add(S["Security"], security => security.Id("security")
                    .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId
                        .AddClass("openid")
                        .Id("openid")
-                       .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings
-                            .Add(S["Authorization Server"], S["Authorization Server"].PrefixPosition(), server => server
+                       .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings.Id("settings")
+                            .Add(S["Authorization Server"], S["Authorization Server"].PrefixPosition(), server => server.Id("authorization-server")
                                 .Action("Index", "ServerConfiguration", "OrchardCore.OpenId")
                                 .Permission(OpenIdPermissions.ManageServerSettings)
                                 .LocalNav()
@@ -35,11 +35,11 @@ public sealed class ServerAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
+            .Add(S["Settings"], settings => settings.Id("settings")
                 .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId
                     .AddClass("openid")
                     .Id("openid")
-                    .Add(S["Authorization Server"], S["Authorization Server"].PrefixPosition(), server => server
+                    .Add(S["Authorization Server"], S["Authorization Server"].PrefixPosition(), server => server.Id("authorization-server")
                         .Action("Index", "ServerConfiguration", "OrchardCore.OpenId")
                         .Permission(OpenIdPermissions.ManageServerSettings)
                         .LocalNav()

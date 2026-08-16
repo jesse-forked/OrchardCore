@@ -24,8 +24,8 @@ public sealed class AdminMenu : AdminNavigationProvider
     protected override ValueTask BuildAsync(NavigationBuilder builder)
     {
         builder
-            .Add(S["Content"], design => design
-                .Add(S["Menus"], S["Menus"].PrefixPosition(), menus => menus
+            .Add(S["Content"], design => design.Id("content")
+                .Add(S["Menus"], S["Menus"].PrefixPosition(), menus => menus.Id("menus")
                     .Permission(Permissions.ManageMenu)
                     .Action("List", "Admin", s_routeValues)
                     .LocalNav()

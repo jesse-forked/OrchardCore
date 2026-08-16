@@ -24,8 +24,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
                         .Add(S["Meta App"], S["Meta App"].PrefixPosition(), metaApp => metaApp
                             .AddClass("facebookApp")
                             .Id("facebookApp")
@@ -40,8 +40,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Integrations"], S["Integrations"].PrefixPosition(), integrations => integrations
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Integrations"], S["Integrations"].PrefixPosition(), integrations => integrations.Id("integrations")
                     .Add(S["Meta App"], S["Meta App"].PrefixPosition(), metaApp => metaApp
                         .AddClass("facebookApp")
                         .Id("facebookApp")

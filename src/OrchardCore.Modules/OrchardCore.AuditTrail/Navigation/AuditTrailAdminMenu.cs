@@ -39,8 +39,8 @@ public sealed class AuditTrailAdminMenu : AdminNavigationProvider
                     .Permission(AuditTrailPermissions.ViewAuditTrail)
                     .LocalNav()
                 , priority: 1)
-                .Add(S["Configuration"], configuration => configuration
-                     .Add(S["Settings"], settings => settings
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                     .Add(S["Settings"], settings => settings.Id("settings")
                         .Add(S["Audit Trail"], S["Audit Trail"].PrefixPosition(), auditTrail => auditTrail
                             .AddClass("audittrail")
                             .Id("audittrailSettings")
@@ -55,7 +55,7 @@ public sealed class AuditTrailAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
+            .Add(S["Tools"], tools => tools.Id("tools")
                 .Add(S["Audit Trail"], S["Audit Trail"].PrefixPosition(), configuration => configuration
                     .AddClass("audittrail")
                     .Id("audittrail")
@@ -64,7 +64,7 @@ public sealed class AuditTrailAdminMenu : AdminNavigationProvider
                     .LocalNav()
                 )
             )
-            .Add(S["Settings"], settings => settings
+            .Add(S["Settings"], settings => settings.Id("settings")
                 .Add(S["Audit Trail"], S["Audit Trail"].PrefixPosition(), auditTrail => auditTrail
                     .AddClass("audittrail")
                     .Id("audittrailSettings")

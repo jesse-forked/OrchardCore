@@ -17,8 +17,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["GraphiQL"], S["GraphiQL"].PrefixPosition(), graphiQL => graphiQL
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["GraphiQL"], S["GraphiQL"].PrefixPosition(), graphiQL => graphiQL.Id("graphiql")
                         .Action("Index", "Admin", "OrchardCore.Apis.GraphQL")
                         .Permission(GraphQLPermissions.ExecuteGraphQL)
                         .LocalNav()
@@ -29,8 +29,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
-                .Add(S["GraphiQL"], S["GraphiQL"].PrefixPosition(), graphiQL => graphiQL
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["GraphiQL"], S["GraphiQL"].PrefixPosition(), graphiQL => graphiQL.Id("graphiql")
                     .Action("Index", "Admin", "OrchardCore.Apis.GraphQL")
                     .Permission(GraphQLPermissions.ExecuteGraphQL)
                     .LocalNav()

@@ -25,15 +25,15 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Design"], design => design
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["Zones"], S["Zones"].PrefixPosition(), zones => zones
+                .Add(S["Design"], design => design.Id("design")
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["Zones"], S["Zones"].PrefixPosition(), zones => zones.Id("zones")
                             .Action("Index", "Admin", s_routeValues)
                             .Permission(Permissions.ManageLayers)
                             .LocalNav()
                         )
                     )
-                    .Add(S["Widgets"], S["Widgets"].PrefixPosition(), widgets => widgets
+                    .Add(S["Widgets"], S["Widgets"].PrefixPosition(), widgets => widgets.Id("widgets")
                         .Permission(Permissions.ManageLayers)
                         .Action("Index", "Admin", "OrchardCore.Layers")
                         .LocalNav()
@@ -44,15 +44,15 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Design"], design => design
-                .Add(S["Widgets"], S["Widgets"].PrefixPosition(), widgets => widgets
+            .Add(S["Design"], design => design.Id("design")
+                .Add(S["Widgets"], S["Widgets"].PrefixPosition(), widgets => widgets.Id("widgets")
                     .Permission(Permissions.ManageLayers)
                     .Action("Index", "Admin", "OrchardCore.Layers")
                     .LocalNav()
                 )
             )
-            .Add(S["Settings"], settings => settings
-                .Add(S["Zones"], S["Zones"].PrefixPosition(), zones => zones
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Zones"], S["Zones"].PrefixPosition(), zones => zones.Id("zones")
                     .Action("Index", "Admin", s_routeValues)
                     .Permission(Permissions.ManageLayers)
                     .LocalNav()

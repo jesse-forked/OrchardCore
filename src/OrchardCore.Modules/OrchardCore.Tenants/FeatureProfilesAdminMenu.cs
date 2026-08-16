@@ -28,9 +28,9 @@ public sealed class FeatureProfilesAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Multi-Tenancy"], tenancy => tenancy
+            .Add(S["Multi-Tenancy"], tenancy => tenancy.Id("multi-tenancy")
                 .AddClass("menu-multitenancy")
-                .Add(S["Feature Profiles"], S["Feature Profiles"].PrefixPosition(), featureProfiles => featureProfiles
+                .Add(S["Feature Profiles"], S["Feature Profiles"].PrefixPosition(), featureProfiles => featureProfiles.Id("feature-profiles")
                     .Action("Index", "FeatureProfiles", "OrchardCore.Tenants")
                     .Permission(Permissions.ManageTenantFeatureProfiles)
                     .LocalNav()

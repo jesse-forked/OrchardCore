@@ -23,8 +23,8 @@ public sealed class AdminMenu : AdminNavigationProvider
     protected override ValueTask BuildAsync(NavigationBuilder builder)
     {
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["OpenApi"], S["OpenApi"].PrefixPosition(), openApi => openApi
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["OpenApi"], S["OpenApi"].PrefixPosition(), openApi => openApi.Id("openapi")
                     .Permission(OpenApiPermissions.ManageOpenApi)
                     .Action("Index", "Admin", s_routeValues)
                     .LocalNav()

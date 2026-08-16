@@ -25,9 +25,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Security"], security => security
-                    .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings
-                        .Add(S["HTTPS"], S["HTTPS"].PrefixPosition(), https => https
+                .Add(S["Security"], security => security.Id("security")
+                    .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings.Id("settings")
+                        .Add(S["HTTPS"], S["HTTPS"].PrefixPosition(), https => https.Id("https")
                             .Action("Index", "Admin", s_routeValues)
                             .Permission(Permissions.ManageHttps)
                             .LocalNav()
@@ -39,9 +39,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["HTTPS"], S["HTTPS"].PrefixPosition(), https => https
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["HTTPS"], S["HTTPS"].PrefixPosition(), https => https.Id("https")
                         .Action("Index", "Admin", s_routeValues)
                         .Permission(Permissions.ManageHttps)
                         .LocalNav()

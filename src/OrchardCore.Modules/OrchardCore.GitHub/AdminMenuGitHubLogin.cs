@@ -24,8 +24,8 @@ public sealed class AdminMenuGitHubLogin : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-            .Add(S["Security"], security => security
-                .Add(S["Authentication"], authentication => authentication
+            .Add(S["Security"], security => security.Id("security")
+                .Add(S["Authentication"], authentication => authentication.Id("authentication")
                     .Add(S["GitHub"], S["GitHub"].PrefixPosition(), settings => settings
                         .AddClass("github")
                         .Id("github")
@@ -40,9 +40,9 @@ public sealed class AdminMenuGitHubLogin : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["Authentication"], S["Authentication"].PrefixPosition(), authentication => authentication
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["Authentication"], S["Authentication"].PrefixPosition(), authentication => authentication.Id("authentication")
                         .Add(S["GitHub"], S["GitHub"].PrefixPosition(), settings => settings
                             .AddClass("github")
                             .Id("github")

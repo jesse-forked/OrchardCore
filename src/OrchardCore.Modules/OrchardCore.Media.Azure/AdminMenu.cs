@@ -17,9 +17,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                        .Add(S["Azure Blob Options"], S["Azure Blob Options"].PrefixPosition(), options => options
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                        .Add(S["Azure Blob Options"], S["Azure Blob Options"].PrefixPosition(), options => options.Id("azure-blob-options")
                             .Action("Options", "Admin", "OrchardCore.Media.Azure")
                             .Permission(Permissions.ViewAzureMediaOptions)
                             .LocalNav()
@@ -31,9 +31,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                    .Add(S["Azure Blob Options"], S["Azure Blob Options"].PrefixPosition(), options => options
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                    .Add(S["Azure Blob Options"], S["Azure Blob Options"].PrefixPosition(), options => options.Id("azure-blob-options")
                         .Action("Options", "Admin", "OrchardCore.Media.Azure")
                         .Permission(Permissions.ViewAzureMediaOptions)
                         .LocalNav()

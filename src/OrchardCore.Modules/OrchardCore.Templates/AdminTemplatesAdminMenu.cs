@@ -15,8 +15,8 @@ public sealed class AdminTemplatesAdminMenu : AdminNavigationProvider
     protected override ValueTask BuildAsync(NavigationBuilder builder)
     {
         builder
-            .Add(S["Design"], design => design
-                .Add(S["Admin Templates"], S["Admin Templates"].PrefixPosition(), import => import
+            .Add(S["Design"], design => design.Id("design")
+                .Add(S["Admin Templates"], S["Admin Templates"].PrefixPosition(), import => import.Id("admin-templates")
                     .Action("Admin", "Template", "OrchardCore.Templates")
                     .Permission(AdminTemplatesPermissions.ManageAdminTemplates)
                     .LocalNav()

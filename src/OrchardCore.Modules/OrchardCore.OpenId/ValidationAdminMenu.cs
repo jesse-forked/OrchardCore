@@ -17,12 +17,12 @@ public sealed class ValidationAdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-               .Add(S["Security"], security => security
+               .Add(S["Security"], security => security.Id("security")
                    .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId
                        .AddClass("openid")
                        .Id("openid")
-                       .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings
-                            .Add(S["Token Validation"], S["Token Validation"].PrefixPosition(), validation => validation
+                       .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings.Id("settings")
+                            .Add(S["Token Validation"], S["Token Validation"].PrefixPosition(), validation => validation.Id("token-validation")
                                 .Action("Index", "ValidationConfiguration", "OrchardCore.OpenId")
                                 .Permission(OpenIdPermissions.ManageValidationSettings)
                                 .LocalNav()
@@ -35,9 +35,9 @@ public sealed class ValidationAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId
-                    .Add(S["Token Validation"], S["Token Validation"].PrefixPosition(), validation => validation
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["OpenID Connect"], S["OpenID Connect"].PrefixPosition(), openId => openId.Id("openid-connect")
+                    .Add(S["Token Validation"], S["Token Validation"].PrefixPosition(), validation => validation.Id("token-validation")
                         .Action("Index", "ValidationConfiguration", "OrchardCore.OpenId")
                         .Permission(OpenIdPermissions.ManageValidationSettings)
                         .LocalNav()

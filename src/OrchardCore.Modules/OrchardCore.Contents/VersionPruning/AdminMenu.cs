@@ -25,9 +25,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["Content Version Pruning"], S["Content Version Pruning"], pruning => pruning
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["Content Version Pruning"], S["Content Version Pruning"], pruning => pruning.Id("content-version-pruning")
                             .Action("Index", "Admin", s_routeValues)
                             .Permission(ContentVersionPruningPermissions.ManageContentVersionPruningSettings)
                             .LocalNav()
@@ -39,8 +39,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Content Version Pruning"], S["Content Version Pruning"].PrefixPosition(), pruning => pruning
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Content Version Pruning"], S["Content Version Pruning"].PrefixPosition(), pruning => pruning.Id("content-version-pruning")
                     .Action("Index", "Admin", s_routeValues)
                     .Permission(ContentVersionPruningPermissions.ManageContentVersionPruningSettings)
                     .LocalNav()

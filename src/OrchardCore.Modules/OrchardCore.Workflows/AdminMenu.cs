@@ -29,7 +29,7 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Design"], design => design
+            .Add(S["Design"], design => design.Id("design")
                 .Add(S["Workflows"], S["Workflows"].PrefixPosition(), workflow => workflow
                     .AddClass("workflows")
                     .Id("workflows")

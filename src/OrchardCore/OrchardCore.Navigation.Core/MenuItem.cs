@@ -25,7 +25,10 @@ public class MenuItem
     public LocalizedString Text { get; set; }
 
     /// <summary>
-    /// The html id of the menu item.
+    /// The identifier of the menu item. It is used as the shape alternate suffix when rendering
+    /// the item (<c>NavigationItemText_Id__{Id}</c>), and, when
+    /// <see cref="NavigationOptions.RequireMenuItemId"/> is enabled, as the value menu items are
+    /// merged on instead of their (localized) <see cref="Text"/>.
     /// </summary>
     public string Id { get; set; }
 

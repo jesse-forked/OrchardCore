@@ -20,7 +20,7 @@ public sealed class AdminMenu : AdminNavigationProvider
                 .Add(S["Content"], content => content
                     .AddClass("media")
                     .Id("media")
-                    .Add(S["Media Library"], S["Media Library"].PrefixPosition(), media => media
+                    .Add(S["Media Library"], S["Media Library"].PrefixPosition(), media => media.Id("media-library")
                         .Permission(MediaPermissions.ManageMedia)
                         .Action("Index", "Admin", "OrchardCore.Media")
                         .LocalNav()
@@ -28,19 +28,19 @@ public sealed class AdminMenu : AdminNavigationProvider
                 );
 
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                        .Add(S["Media Options"], S["Media Options"].PrefixPosition(), options => options
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                        .Add(S["Media Options"], S["Media Options"].PrefixPosition(), options => options.Id("media-options")
                             .Action("Options", "Admin", "OrchardCore.Media")
                             .Permission(MediaPermissions.ViewMediaOptions)
                             .LocalNav()
                         )
-                        .Add(S["Media Profiles"], S["Media Profiles"].PrefixPosition(), mediaProfiles => mediaProfiles
+                        .Add(S["Media Profiles"], S["Media Profiles"].PrefixPosition(), mediaProfiles => mediaProfiles.Id("media-profiles")
                             .Action("Index", "MediaProfiles", "OrchardCore.Media")
                             .Permission(MediaPermissions.ManageMediaProfiles)
                             .LocalNav()
                         )
-                        .Add(S["Media API"], S["Media API"].PrefixPosition(), api => api
+                        .Add(S["Media API"], S["Media API"].PrefixPosition(), api => api.Id("media-api")
                             .Action("Index", "Admin", new { area = "OrchardCore.Settings", groupId = MediaApiSettings.GroupId })
                             .Permission(MediaPermissions.ManageMediaApiSettings)
                             .LocalNav()
@@ -55,12 +55,12 @@ public sealed class AdminMenu : AdminNavigationProvider
             .Add(S["Media"], "after.15", media => media
                 .AddClass("media")
                 .Id("media")
-                .Add(S["Library"], S["Library"].PrefixPosition("1"), library => library
+                .Add(S["Library"], S["Library"].PrefixPosition("1"), library => library.Id("library")
                     .Permission(MediaPermissions.ManageMedia)
                     .Action("Index", "Admin", "OrchardCore.Media")
                     .LocalNav()
                 )
-                .Add(S["Profiles"], S["Profiles"].PrefixPosition("5"), mediaProfiles => mediaProfiles
+                .Add(S["Profiles"], S["Profiles"].PrefixPosition("5"), mediaProfiles => mediaProfiles.Id("profiles")
                     .Action("Index", "MediaProfiles", "OrchardCore.Media")
                     .Permission(MediaPermissions.ManageMediaProfiles)
                     .LocalNav()
@@ -68,14 +68,14 @@ public sealed class AdminMenu : AdminNavigationProvider
             );
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Media"], S["Media"].PrefixPosition(), media => media
-                    .Add(S["Options"], S["Options"].PrefixPosition(), options => options
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Media"], S["Media"].PrefixPosition(), media => media.Id("media")
+                    .Add(S["Options"], S["Options"].PrefixPosition(), options => options.Id("options")
                         .Action("Options", "Admin", "OrchardCore.Media")
                         .Permission(MediaPermissions.ViewMediaOptions)
                         .LocalNav()
                     )
-                    .Add(S["API"], S["API"].PrefixPosition(), api => api
+                    .Add(S["API"], S["API"].PrefixPosition(), api => api.Id("api")
                         .Action("Index", "Admin", new { area = "OrchardCore.Settings", groupId = MediaApiSettings.GroupId })
                         .Permission(MediaPermissions.ManageMediaApiSettings)
                         .LocalNav()

@@ -25,9 +25,9 @@ public sealed class ChangeEmailAdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Security"], security => security
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["User Change Email"], S["User Change Email"].PrefixPosition(), email => email
+                .Add(S["Security"], security => security.Id("security")
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["User Change Email"], S["User Change Email"].PrefixPosition(), email => email.Id("user-change-email")
                             .Permission(UsersPermissions.ManageUsers)
                             .Action("Index", "Admin", s_routeValues)
                             .LocalNav()
@@ -39,9 +39,9 @@ public sealed class ChangeEmailAdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["Change Email"], S["Change Email"].PrefixPosition(), email => email
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["Change Email"], S["Change Email"].PrefixPosition(), email => email.Id("change-email")
                         .Permission(UsersPermissions.ManageUsers)
                         .Action("Index", "Admin", s_routeValues)
                         .LocalNav()

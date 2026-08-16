@@ -25,9 +25,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Security"], security => security
-                    .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings
-                        .Add(S["reCaptcha"], S["reCaptcha"].PrefixPosition(), reCaptcha => reCaptcha
+                .Add(S["Security"], security => security.Id("security")
+                    .Add(S["Settings"], S["Settings"].PrefixPosition(), settings => settings.Id("settings")
+                        .Add(S["reCaptcha"], S["reCaptcha"].PrefixPosition(), reCaptcha => reCaptcha.Id("recaptcha")
                             .Permission(ReCaptchaPermissions.ManageReCaptchaSettings)
                             .Action("Index", "Admin", s_routeValues)
                             .LocalNav()
@@ -39,9 +39,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Security"], S["Security"].PrefixPosition(), security => security
-                    .Add(S["reCaptcha"], S["reCaptcha"].PrefixPosition(), reCaptcha => reCaptcha
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Security"], S["Security"].PrefixPosition(), security => security.Id("security")
+                    .Add(S["reCaptcha"], S["reCaptcha"].PrefixPosition(), reCaptcha => reCaptcha.Id("recaptcha")
                         .Permission(ReCaptchaPermissions.ManageReCaptchaSettings)
                         .Action("Index", "Admin", s_routeValues)
                         .LocalNav()

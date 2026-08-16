@@ -17,9 +17,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Tasks"], S["Tasks"].PrefixPosition(), tasks => tasks
-                        .Add(S["Background Tasks"], S["Background Tasks"].PrefixPosition(), backgroundTasks => backgroundTasks
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Tasks"], S["Tasks"].PrefixPosition(), tasks => tasks.Id("tasks")
+                        .Add(S["Background Tasks"], S["Background Tasks"].PrefixPosition(), backgroundTasks => backgroundTasks.Id("background-tasks")
                             .Action("Index", "BackgroundTask", "OrchardCore.BackgroundTasks")
                             .Permission(Permissions.ManageBackgroundTasks)
                             .LocalNav()
@@ -31,8 +31,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
-                .Add(S["Background Tasks"], S["Background Tasks"].PrefixPosition(), backgroundTasks => backgroundTasks
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["Background Tasks"], S["Background Tasks"].PrefixPosition(), backgroundTasks => backgroundTasks.Id("background-tasks")
                     .Action("Index", "BackgroundTask", "OrchardCore.BackgroundTasks")
                     .Permission(Permissions.ManageBackgroundTasks)
                     .LocalNav()

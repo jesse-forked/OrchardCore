@@ -18,7 +18,7 @@ public sealed class AdminMenu : AdminNavigationProvider
             .Add(S["Design"], NavigationConstants.AdminMenuDesignPosition, design => design
                 .AddClass("design")
                 .Id("design")
-                .Add(S["Themes"], S["Themes"].PrefixPosition(), themes => themes
+                .Add(S["Themes"], S["Themes"].PrefixPosition(), themes => themes.Id("themes")
                     .Action("Index", "Admin", "OrchardCore.Themes")
                     .Permission(Permissions.ApplyTheme)
                     .LocalNav()

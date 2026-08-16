@@ -17,14 +17,14 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-                .Add(S["Configuration"], configuration => configuration
-                    .Add(S["Import/Export"], import => import
-                        .Add(S["Remote Instances"], S["Remote Instances"].PrefixPosition(), remote => remote
+                .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                    .Add(S["Import/Export"], import => import.Id("import-export")
+                        .Add(S["Remote Instances"], S["Remote Instances"].PrefixPosition(), remote => remote.Id("remote-instances")
                             .Action("Index", "RemoteInstance", "OrchardCore.Deployment.Remote")
                             .Permission(DeploymentPermissions.ManageRemoteInstances)
                             .LocalNav()
                         )
-                        .Add(S["Remote Clients"], S["Remote Clients"].PrefixPosition(), remote => remote
+                        .Add(S["Remote Clients"], S["Remote Clients"].PrefixPosition(), remote => remote.Id("remote-clients")
                             .Action("Index", "RemoteClient", "OrchardCore.Deployment.Remote")
                             .Permission(DeploymentPermissions.ManageRemoteClients)
                             .LocalNav()
@@ -36,14 +36,14 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Tools"], tools => tools
-                .Add(S["Deployments"], import => import
-                    .Add(S["Remote Instances"], S["Remote Instances"].PrefixPosition(), remote => remote
+            .Add(S["Tools"], tools => tools.Id("tools")
+                .Add(S["Deployments"], import => import.Id("deployments")
+                    .Add(S["Remote Instances"], S["Remote Instances"].PrefixPosition(), remote => remote.Id("remote-instances")
                         .Action("Index", "RemoteInstance", "OrchardCore.Deployment.Remote")
                         .Permission(DeploymentPermissions.ManageRemoteInstances)
                         .LocalNav()
                     )
-                    .Add(S["Remote Clients"], S["Remote Clients"].PrefixPosition(), remote => remote
+                    .Add(S["Remote Clients"], S["Remote Clients"].PrefixPosition(), remote => remote.Id("remote-clients")
                         .Action("Index", "RemoteClient", "OrchardCore.Deployment.Remote")
                         .Permission(DeploymentPermissions.ManageRemoteClients)
                         .LocalNav()

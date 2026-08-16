@@ -25,10 +25,10 @@ public sealed class ExportContentToDeploymentTargetAdminMenu : AdminNavigationPr
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-            .Add(S["Configuration"], configuration => configuration
-                .Add(S["Import/Export"], S["Import/Export"].PrefixPosition(), import => import
-                    .Add(S["Settings"], settings => settings
-                        .Add(S["Export target"], S["Export target"].PrefixPosition(), targetSettings => targetSettings
+            .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                .Add(S["Import/Export"], S["Import/Export"].PrefixPosition(), import => import.Id("import-export")
+                    .Add(S["Settings"], settings => settings.Id("settings")
+                        .Add(S["Export target"], S["Export target"].PrefixPosition(), targetSettings => targetSettings.Id("export-target")
                             .Action("Index", "Admin", s_routeValues)
                             .Permission(DeploymentPermissions.ManageDeploymentPlan)
                             .LocalNav()
@@ -41,8 +41,8 @@ public sealed class ExportContentToDeploymentTargetAdminMenu : AdminNavigationPr
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Deployment Targets"], S["Deployment Targets"].PrefixPosition(), targetSettings => targetSettings
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Deployment Targets"], S["Deployment Targets"].PrefixPosition(), targetSettings => targetSettings.Id("deployment-targets")
                     .Action("Index", "Admin", s_routeValues)
                     .Permission(DeploymentPermissions.ManageDeploymentPlan)
                     .LocalNav()

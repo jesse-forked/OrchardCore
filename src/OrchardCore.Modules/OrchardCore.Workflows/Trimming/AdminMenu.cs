@@ -25,9 +25,9 @@ public sealed class AdminMenu : AdminNavigationProvider
         if (NavigationHelper.UseLegacyFormat())
         {
             builder
-               .Add(S["Configuration"], configuration => configuration
-                   .Add(S["Settings"], settings => settings
-                       .Add(S["Workflow Trimming"], S["Workflow Trimming"], trimming => trimming
+               .Add(S["Configuration"], configuration => configuration.Id("configuration")
+                   .Add(S["Settings"], settings => settings.Id("settings")
+                       .Add(S["Workflow Trimming"], S["Workflow Trimming"], trimming => trimming.Id("workflow-trimming")
                            .Action("Index", "Admin", s_routeValues)
                            .Permission(WorkflowsPermissions.ManageWorkflowSettings)
                            .LocalNav()
@@ -39,8 +39,8 @@ public sealed class AdminMenu : AdminNavigationProvider
         }
 
         builder
-            .Add(S["Settings"], settings => settings
-                .Add(S["Workflow Trimming"], S["Workflow Trimming"].PrefixPosition(), trimming => trimming
+            .Add(S["Settings"], settings => settings.Id("settings")
+                .Add(S["Workflow Trimming"], S["Workflow Trimming"].PrefixPosition(), trimming => trimming.Id("workflow-trimming")
                     .Action("Index", "Admin", s_routeValues)
                     .Permission(WorkflowsPermissions.ManageWorkflowSettings)
                     .LocalNav()
