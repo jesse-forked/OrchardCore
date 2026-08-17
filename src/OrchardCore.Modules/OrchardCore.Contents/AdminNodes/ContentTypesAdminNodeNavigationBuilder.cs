@@ -58,6 +58,10 @@ public class ContentTypesAdminNodeNavigationBuilder : IAdminNodeNavigationBuilde
                     contentTypeId = ctd.Name,
                 }));
 
+                // This node expands into one menu item per content type, so the node's own
+                // identifier is qualified with the type name to stay unique per built item while
+                // remaining stable when a content type's display name changes.
+                itemBuilder.Id($"{node.UniqueId}-{ctd.Name}");
                 itemBuilder.MenuName(node.MenuName);
                 itemBuilder.Priority(node.Priority);
                 itemBuilder.Position(node.Position);

@@ -101,6 +101,7 @@ public class NavigationManager : INavigationManager
                         source.Id = cursor.Id;
                         source.LinkToFirstChild = cursor.LinkToFirstChild;
                         source.LocalNav = cursor.LocalNav;
+                        source.MenuName = cursor.MenuName;
                         source.Position = cursor.Position;
                         source.Resource = cursor.Resource;
                         source.RouteValues = cursor.RouteValues;
@@ -125,6 +126,7 @@ public class NavigationManager : INavigationManager
                             source.Id = cursor.Id;
                             source.LinkToFirstChild = cursor.LinkToFirstChild;
                             source.LocalNav = cursor.LocalNav;
+                            source.MenuName = cursor.MenuName;
                             source.Position = cursor.Position;
                             source.Resource = cursor.Resource;
                             source.RouteValues = cursor.RouteValues;

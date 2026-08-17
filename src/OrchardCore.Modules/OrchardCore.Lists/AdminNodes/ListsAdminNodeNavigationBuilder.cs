@@ -58,6 +58,9 @@ public class ListsAdminNodeNavigationBuilder : IAdminNodeNavigationBuilder
 
             await builder.AddAsync(new LocalizedString(_contentType.DisplayName, _contentType.DisplayName), async listTypeMenu =>
             {
+                // The node's own identifier, so that the built menu item keeps a stable identity
+                // that does not change when the content type's display name changes.
+                listTypeMenu.Id(_node.UniqueId);
                 AddPrefixToClasses(_node.IconForParentLink).ForEach(c => listTypeMenu.AddClass(c));
                 listTypeMenu.Permission(ContentTypePermissionsHelper.CreateDynamicPermission(
                     ContentTypePermissionsHelper.PermissionTemplates[CommonPermissions.EditContent.Name], _contentType));
@@ -94,6 +97,10 @@ public class ListsAdminNodeNavigationBuilder : IAdminNodeNavigationBuilder
             {
                 listTypeMenu.Add(new LocalizedString(ci.DisplayText, ci.DisplayText), itemBuilder =>
                 {
+                    // This node expands into one menu item per content item, so the node's own
+                    // identifier is qualified with the content item id to stay unique per built
+                    // item while remaining stable when the item's display text changes.
+                    itemBuilder.Id($"{_node.UniqueId}-{ci.ContentItemId}");
                     itemBuilder.MenuName(_node.MenuName);
                     itemBuilder.Action(cim.AdminRouteValues["Action"] as string, cim.AdminRouteValues["Controller"] as string, cim.AdminRouteValues);
                     itemBuilder.Resource(ci);

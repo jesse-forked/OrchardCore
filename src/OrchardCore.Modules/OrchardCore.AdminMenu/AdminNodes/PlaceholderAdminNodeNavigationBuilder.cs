@@ -32,6 +32,9 @@ public class PlaceholderAdminNodeNavigationBuilder : IAdminNodeNavigationBuilder
 
         return builder.AddAsync(new LocalizedString(node.LinkText, node.LinkText), async itemBuilder =>
         {
+            // The node's own identifier, so that the built menu item keeps a stable identity that
+            // does not change when its caption is edited.
+            itemBuilder.Id(node.UniqueId);
             itemBuilder.MenuName(node.MenuName);
             itemBuilder.Priority(node.Priority);
             itemBuilder.Position(node.Position);
