@@ -19,7 +19,9 @@ public class PreviewTemplatesProvider
 
             var templatesDocument = new TemplatesDocument();
 
-            if (httpContext.Items.TryGetValue("OrchardCore.PreviewTemplate", out var model))
+            // No HttpContext outside a request (e.g. resolving the shape binding resolvers while
+            // a tenant is activated in the background): nothing is being previewed then.
+            if (httpContext is not null && httpContext.Items.TryGetValue("OrchardCore.PreviewTemplate", out var model))
             {
                 var viewModel = model as TemplateViewModel;
 
