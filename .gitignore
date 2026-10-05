@@ -229,3 +229,6 @@ BenchmarkDotNet.Artifacts
 .playwright-cli
 .claude/*
 agents.md
+
+# Packed NuGet packages for host apps (dotnet pack OrchardCore.slnx -o output)
+/output/
